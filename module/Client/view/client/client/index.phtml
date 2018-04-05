@@ -13,12 +13,20 @@ $this->headTitle($title);
 <tr>
     <th>Nom</th>
     <th>Prénom</th>
+    <th>Adresse</th>
+    <th>Email</th>
+    <th>Date de Naissance</th>
+    <th>Sexe</th>
     <th>&nbsp;</th>
 </tr>
 <?php foreach ($paginator as $client) : ?>
     <tr>
         <td><?= $this->escapeHtml($client->nom) ?></td>
         <td><?= $this->escapeHtml($client->prenom) ?></td>
+        <td><?= $this->escapeHtml($client->adresse) ?></td>
+        <td><?= $this->escapeHtml($client->email) ?></td>
+        <td><?= $this->escapeHtml($client->dateNaissance) ?></td>
+        <td><?= $this->escapeHtml($client->sexe) ?></td>
         <td>
             <a href="<?= $this->url('client', ['action' => 'edit', 'id' => $client->id]) ?>">Modifier</a>
             <a href="<?= $this->url('client', ['action' => 'delete', 'id' => $client->id]) ?>">Supprimer</a>

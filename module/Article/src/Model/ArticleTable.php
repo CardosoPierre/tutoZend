@@ -1,5 +1,5 @@
 <?php
-namespace Client\Model;
+namespace Article\Model;
 
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
@@ -8,7 +8,7 @@ use Zend\Paginator\Paginator;
 use Zend\Db\Sql\Select;
 use Zend\Db\ResultSet\ResultSet;
 
-class ClientTable
+class ArticleTable
 {
     private $tableGateway ;
 
@@ -21,7 +21,7 @@ class ClientTable
     {
         $select = new Select($this->tableGateway->getTable());
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Client());
+        $resultSetPrototype->setArrayObjectPrototype(new Article());
         $paginatorAdapter = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
 
         $paginator = new Paginator($paginatorAdapter);
@@ -36,7 +36,7 @@ class ClientTable
         return $this->tableGateway->select() ;
     }
 
-    public function getClient($id)
+    public function getArticle($id)
     {
         $id = (int) $id ;
         $rowset = $this->tableGateway->select(['id' => $id]) ;
@@ -47,32 +47,28 @@ class ClientTable
         return $row;
     }
 
-    public function saveClient(Client $client)
+    public function saveArticle(Article $article)
     {
         $data = [
-            'nom' => $client->nom,
-            'prenom' => $client->prenom,
-            'adresse' => $client->adresse,
-            'email' => $client->email,
-            'dateNaissance' => $client->dateNaissance,
-            'sexe' => $client->sexe,
+            'designation' => $article->designation,
+            'prix' => $article->prix,
         ];
 
-        $id = (int)$client->id ;
+        $id = (int)$article->id ;
 
         if ($id === 0) {
             $this->tableGateway->insert($data) ;
             return;
         }
 
-        if (!$this->getClient($id)) {
-            throw new RuntimeException(sprintf("Impossible de mettre � jour le client avec  l'enregistrement %d, il n'existe pas",$id));
+        if (!$this->getArticle($id)) {
+            throw new RuntimeException(sprintf("Impossible de mettre � jour l'article avec  l'enregistrement %d, il n'existe pas",$id));
         }
 
         $this->tableGateway->update($data, array('id' => $id)) ;
     }
 
-    public function deleteClient($id)
+    public function deleteArticle($id)
     {
         $this->tableGateway->delete(array('id' => (int)$id)) ;
     }

@@ -85,6 +85,27 @@ return [
                     ],
                 ],
             ],
+            [
+                'label' => 'Article',
+                'route' => 'article',
+                'pages' => [
+                    [
+                        'label'     =>  'Ajouter',
+                        'route'     =>  'article',
+                        'action'    =>  'add',
+                    ],
+                    [
+                        'label'     =>  'Modifier',
+                        'route'     =>  'article',
+                        'action'    =>  'edit',
+                    ],
+                    [
+                        'label'     =>  'Supprimer',
+                        'route'     =>  'article',
+                        'action'    =>  'delete',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

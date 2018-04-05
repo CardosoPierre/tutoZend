@@ -1,0 +1,43 @@
+<?php
+
+$title = 'Ajouter un article';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// Ceci fournit le style de l'élément  nom:
+$designation = $form->get('designation');
+$designation->setAttribute('class', 'form-control');
+$designation->setAttribute('placeholder', 'Designation de l\'Article');
+
+// Ceci fournit le style de l'élément  prnom:
+$prix = $form->get('prix');
+$prix->setAttribute('class', 'form-control');
+$prix->setAttribute('placeholder', 'Prix Unitaire');
+
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+
+$form->setAttribute('action', $this->url('article', ['action' => 'add']));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($designation) ?>
+    <?= $this->formElement($designation) ?>
+    <?= $this->formElementErrors()->render($designation, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($prix) ?>
+    <?= $this->formElement($prix) ?>
+    <?= $this->formElementErrors()->render($prix, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();

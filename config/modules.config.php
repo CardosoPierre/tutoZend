@@ -20,4 +20,5 @@ return [
     'Zend\Validator',
     'Application',
 	'Client',
+    'Article',
 ];

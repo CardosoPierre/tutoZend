@@ -16,6 +16,22 @@ $prenom = $form->get('prenom');
 $prenom->setAttribute('class', 'form-control');
 $prenom->setAttribute('placeholder', 'Prénom');
 
+$adresse = $form->get('adresse');
+$adresse->setAttribute('class', 'form-control');
+$adresse->setAttribute('placeholder', 'Adresse');
+
+$email = $form->get('email');
+$email->setAttribute('class', 'form-control');
+$email->setAttribute('placeholder', 'Email');
+
+$dateNaissance = $form->get('dateNaissance');
+$dateNaissance->setAttribute('class', 'form-control');
+$dateNaissance->setAttribute('placeholder', 'Date de Naissance');
+
+$sexe = $form->get('sexe');
+$sexe->setAttribute('class', 'form-control');
+$sexe->setAttribute('placeholder', 'Sexe');
+
 // Ceci fournit le style de l'élément  bouton de soumission:
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
@@ -37,6 +53,30 @@ echo $this->form()->openTag($form);
     <?= $this->formLabel($prenom) ?>
     <?= $this->formElement($prenom) ?>
     <?= $this->formElementErrors()->render($prenom, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($adresse) ?>
+    <?= $this->formElement($adresse) ?>
+    <?= $this->formElementErrors()->render($adresse, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($email) ?>
+    <?= $this->formElement($email) ?>
+    <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($dateNaissance) ?>
+    <?= $this->formElement($dateNaissance) ?>
+    <?= $this->formElementErrors()->render($dateNaissance, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($sexe) ?>
+    <?= $this->formElement($sexe) ?>
+    <?= $this->formElementErrors()->render($sexe, ['class' => 'help-block']) ?>
 </div>
 
 <?php

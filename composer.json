@@ -26,8 +26,8 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-			"Client\\": "module/Client/src/"
-			
+			"Client\\": "module/Client/src/",
+            "Article\\": "module/Article/src/"
         }
     },
     "autoload-dev": {

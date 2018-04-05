@@ -1,0 +1,44 @@
+<?php
+// module/Client/view/client/client/edit.phtml:
+
+$title = 'Modifier un article';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$designation = $form->get('designation');
+$designation->setAttribute('class', 'form-control');
+$designation->setAttribute('placeholder', 'Désignation de l\'Article');
+
+$prix = $form->get('prix');
+$prix->setAttribute('class', 'form-control');
+$prix->setAttribute('placeholder', 'Prix Unitaire');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('article', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($designation) ?>
+    <?= $this->formElement($designation) ?>
+    <?= $this->formElementErrors()->render($designation, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($prix) ?>
+    <?= $this->formElement($prix) ?>
+    <?= $this->formElementErrors()->render($prix, ['class' => 'help-block']) ?>
+</div>
+
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();

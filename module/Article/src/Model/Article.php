@@ -8,7 +8,7 @@ class Translator extends ZendI18nTranslator implements TranslatorInterface {
 
 }
 
-namespace Client\Model;
+namespace Article\Model;
 
 use DomainException;
 use Zend\Filter\StringTrim;
@@ -23,39 +23,27 @@ use Application\Util\Translator ;
 use Zend\Validator\AbstractValidator;
 use Zend\I18n\Translator\Resources ;
 
-class Client implements InputFilterAwareInterface
+class Article implements InputFilterAwareInterface
 {
     public $id;
-    public $nom;
-    public $prenom;
-    public $adresse;
-    public $email;
-    public $dateNaissance;
-    public $sexe;
+    public $designation;
+    public $prix;
 
     private $inputFilter;
 
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
-        $this->nom = (isset($data['nom'])) ? $data['nom'] : null;
-        $this->prenom  = (isset($data['prenom'])) ? $data['prenom'] : null;
-        $this->adresse  = (isset($data['adresse'])) ? $data['adresse'] : null;
-        $this->email  = (isset($data['email'])) ? $data['email'] : null;
-        $this->dateNaissance  = (isset($data['dateNaissance'])) ? $data['dateNaissance'] : null;
-        $this->sexe  = (isset($data['sexe'])) ? $data['sexe'] : null;
+        $this->designation = (isset($data['designation'])) ? $data['designation'] : null;
+        $this->prix  = (isset($data['prix'])) ? $data['prix'] : null;
     }
 
     public function getArrayCopy()
     {
         return [
             'id'     => $this->id,
-            'nom' => $this->nom,
-            'prenom'  => $this->prenom,
-            'adresse'  => $this->adresse,
-            'email'  => $this->email,
-            'dateNaissance'  => $this->dateNaissance,
-            'sexe'  => $this->sexe,
+            'designation' => $this->designation,
+            'prix'  => $this->prix,
         ];
     }
 
@@ -91,7 +79,7 @@ class Client implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
-            'name' => 'nom',
+            'name' => 'designation',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
@@ -110,7 +98,7 @@ class Client implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
-            'name' => 'prenom',
+            'name' => 'prix',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
@@ -118,69 +106,10 @@ class Client implements InputFilterAwareInterface
             ],
             'validators' => [
                 [
-                    'name' => StringLength::class,
+                    'name' => 'Float',
                     'options' => [
                         'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 100,
-                    ],
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name' => 'adresse',
-            'required' => true,
-            'filters' => [
-                ['name' => StripTags::class],
-                ['name' => StringTrim::class],
-            ],
-            'validators' => [
-                [
-                    'name' => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 255,
-                    ],
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name' => 'email',
-            'required' => true,
-            'filters' => [
-                ['name' => StripTags::class],
-                ['name' => StringTrim::class],
-            ],
-            'validators' => [
-                [
-                    'name' => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 255,
-                    ],
-                ],
-                [
-                    'name' => 'EmailAddress'
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name' => 'dateNaissance',
-            'required' => true,
-            'filters' => [
-                ['name' => StripTags::class],
-                ['name' => StringTrim::class],
-            ],
-            'validators' => [
-                [
-                    'name' => Date::class,
-                    'options' => [
-                        'format' => 'Y-m-d',
+                        'min' => 0,
                     ],
                 ],
             ],

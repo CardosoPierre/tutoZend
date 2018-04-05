@@ -1,6 +1,7 @@
 <?php
 namespace Client\Form;
 
+use Zend\Form\Element;
 use Zend\Form\Form;
 
 class ClientForm extends Form
@@ -14,6 +15,7 @@ class ClientForm extends Form
             'name' => 'id',
             'type' => 'hidden',
         ]);
+
         $this->add([
             'name' => 'nom',
             'type' => 'text',
@@ -21,6 +23,7 @@ class ClientForm extends Form
                 'label' => 'Nom',
             ],
         ]);
+
         $this->add([
             'name' => 'prenom',
             'type' => 'text',
@@ -28,6 +31,51 @@ class ClientForm extends Form
                 'label' => 'Prénom',
             ],
         ]);
+
+        $this->add([
+            'name' => 'adresse',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Adresse',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'email',
+            'type' => 'Email',
+            'options' => [
+                'label' => 'Email',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'dateNaissance',
+            'type' => Element\Date::class,
+            'options' => [
+                'label'     =>  'Date de Naissance',
+                'format'    =>  'Y-m-d',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'sexe',
+            'type' => Element\Radio::class,
+            'options' => [
+                'label' => 'Sexe',
+                'value_options' => [
+                    [
+                        'value' => 'F',
+                        'label' => 'F',
+                        'selected' => true,
+                    ],
+                    [
+                        'value' => 'M',
+                        'label' => 'M',
+                    ],
+                ]
+            ]
+        ]);
+
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
