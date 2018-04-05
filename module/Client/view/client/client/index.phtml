@@ -1,0 +1,37 @@
+<?php
+// module/Client/view/client/client/index.phtml:
+
+$title = 'Mes clients';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('client', ['action' => 'add']) ?>">Ajouter un client</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($paginator as $client) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($client->nom) ?></td>
+        <td><?= $this->escapeHtml($client->prenom) ?></td>
+        <td>
+            <a href="<?= $this->url('client', ['action' => 'edit', 'id' => $client->id]) ?>">Modifier</a>
+            <a href="<?= $this->url('client', ['action' => 'delete', 'id' => $client->id]) ?>">Supprimer</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<?= $this->paginationControl(
+    $this->paginator,
+    'sliding',
+    'partial/paginator',
+    [
+        'route' => 'client'
+    ]
+)
+?>
